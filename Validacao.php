@@ -50,7 +50,7 @@ class Validacao
         )->fetch();
 
         if($result){
-            $this->validacoes[] = "O $campo já existe";
+            $this->addError($campo, "O $campo já existe");
         }
     }
     
@@ -60,7 +60,7 @@ class Validacao
     {
 
         if (strlen($value) == 0) {
-            $this->validacoes[] = "O $campo é obrigatório";
+            $this->addError($campo, "O $campo é obrigatório");
         }
 
     }
@@ -69,7 +69,7 @@ class Validacao
     private function email($campo,$value)
     {
         if (! filter_var($value, FILTER_VALIDATE_EMAIL)) {
-        $this->validacoes[] = "O $campo é inválido";
+        $this->addError($campo, "O $campo é inválido") ;
         }
     }
 
@@ -77,16 +77,21 @@ class Validacao
     private function confirmed($campo, $value, $campoConfirmacao) {
         
         if ($value != $campoConfirmacao) {
-         $this->validacoes[] = "O $campo de confirmação está diferente";
+         $this->addError($campo,  "O $campo de confirmação está diferente");
     }
     }
     
     
     private function min($min, $campo, $value){
         if(strlen($value) < $min){
-            $this->validacoes[] = "O $campo deve conter no minimo $min caracteres";
+           $this->addError($campo,  "O $campo deve conter no minimo $min caracteres");
         }
     }
+
+    private function addError($campo,$erro){
+        $this->validacoes[$campo][]= $erro;
+    }
+ 
     
     public function login($usuario,$email,$password){
         

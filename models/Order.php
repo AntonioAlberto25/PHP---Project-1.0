@@ -14,7 +14,8 @@ class Order {
        $database = new Database(config('database'));
 
        return $database->query(
-        query: "SELECT * FROM orders where $where",
+        query: "SELECT id, name, description, date_entrega, status 
+        FROM orders where $where",
         class: self::class,
         params: $params
        );

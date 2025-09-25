@@ -48,4 +48,3 @@ function config($key = null)
 
     return $config;
 }
-

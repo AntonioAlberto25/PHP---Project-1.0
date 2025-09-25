@@ -11,5 +11,9 @@ $search = $_REQUEST['search'] ?? '';
 
 $orders = Order::all($search, $user_id);
 
+foreach ($orders as $i => $order){
+    $order->numero = $i + 1;
+};
+
    
 view('dashboard', compact('orders'));

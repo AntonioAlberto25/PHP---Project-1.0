@@ -6,29 +6,50 @@
     <title>Projeto Bolo</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-     <style>
-    html {
-      overflow-y: scroll; /* força sempre mostrar a barra de rolagem */
-    }
-  </style>
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+    </style>
 </head>
-<body class="">
-<header class=""> 
-    <div class="navbar bg-base-100 shadow-sm space-x-10 justify-center">
-        <a href="/revenues" class="btn btn-ghost text-xl">Receitas</a>
-        <a href="/inputs" class="btn btn-ghost text-xl">Insumos</a>
-        <a href="/" class="btn btn-ghost text-xl">Vendas e Pedidos</a>
+<body class="bg-blue-100 min-h-screen">
 
-        <?php if (auth()):?>
-
-           <a href="/logout" class="btn btn-ghost text-xl">Logout</a>
-
-        <?php endif; ?>
+<!-- Header -->
+<header class="bg-white shadow-sm border-b border-gray-200">
+    <div class="navbar max-w-screen-lg mx-auto">
+        <!-- Logo/Brand -->
+        <div class="navbar-start">
+            <a href="/" class="btn btn-ghost text-xl font-semibold">
+                🍰 Projeto Bolo
+            </a>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="navbar-center">
+            <div class="flex gap-2">
+                <a href="/revenues" class="btn <?= $_SERVER['REQUEST_URI'] == '/revenues' ? : 'btn-ghost hover:btn-primary' ?> transition-colors">
+                    Receitas
+                </a>
+                <a href="/" class="btn <?= $_SERVER['REQUEST_URI'] == '/' ? : 'btn-ghost hover:btn-primary' ?> transition-colors">
+                    Pedidos
+                </a>
+            </div>
+        </div>
+        
+        <!-- User Actions -->
+        <div class="navbar-end">
+            <a href="/logout" class="btn btn-outline btn-sm">
+                Logout
+            </a>
+        </div>
     </div>
-</header> 
+</header>
 
-<main class="mx-auto max-w-screen-lg">
-    <?php require "../views/{$view}.view.php"?>
+<!-- Main Content -->
+<main class="mx-auto max-w-screen-lg px-4 py-8">
+    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+        <?php require "../views/{$view}.view.php"?>
+    </div>
 </main>
 
 </body>

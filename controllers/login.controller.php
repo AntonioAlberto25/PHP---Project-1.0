@@ -5,7 +5,6 @@ if(auth()){
     exit();
 }
 
-
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $email = $_POST['email'];
@@ -17,6 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     ], $_POST);
 
     if($validacao->existsError('login')){
+        $_SESSION['old'] = $_POST;
         header('location: /login');
         exit();
     }
@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     )->fetch();
 
         if(!$usuario || !password_verify($_POST['password'], $usuario->password)){
-            flash()->push('validacoes_login',['Email ou senha inválidos']);
+            flash()->push('validacoes_login',['login' => ['Email ou senha inválidos']]);
 
             header('Location: /login');
             exit();
@@ -44,4 +44,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 }
 
-viewRaw('login');
+$old = $_SESSION['old'] ?? [];
+
+unset($_SESSION['old']);
+
+viewRaw('login', compact('old'));

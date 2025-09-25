@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     if($validacao->existsError('register')){
         $_SESSION['old'] = $_POST;
-        header('location: /register');
+        header('Location: /register');
         exit();
     }
     
@@ -35,8 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     ]  
 
     );
-
-    
+  
     flash()->push('mensagem', 'Registrado com sucesso');
     
     header('Location:/login');

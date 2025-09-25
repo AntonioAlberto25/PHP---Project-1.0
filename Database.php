@@ -1,13 +1,26 @@
 <?php
 
+try {
+    //code...
+} catch (\Throwable $th) {
+    //throw $th;
+};
+
+
 class Database
 {
     private $db;
-
+    
+    
+    
     public function __construct($config)
     {
-
-        $this->db = new PDO($this->getDsn($config));
+        try {
+            $this->db = new PDO($this->getDsn($config));
+        } catch (PDOException $e) {
+            die("Erro na conexão:" . $e->getMessage());
+        }
+        
     }
      
     public function getDsn($config){
