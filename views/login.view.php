@@ -1,3 +1,5 @@
+<?php $validacoes = flash()->get('validacoes_login');?>
+
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="light">
 <head>
@@ -27,15 +29,13 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <span class="font-medium"><?=$mensagem?></span>
-    </div>
+        </div>
         <?php endif ?>
         
         
         <h2 class="text-3xl font-bold text-gray-800 text-center mb-6">Acesse sua conta</h2>
 
-           <form id="login" class="space-y-4" method="POST" action="/login">
-                <?php $validacoes = flash()->get('validacoes_login');?>
-                
+           <form id="login" class="space-y-4" method="POST" action="/login">          
                 <div>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -43,7 +43,7 @@
                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                             </svg>
                         </span>
-                        <input type="text" id="email" name="email" placeholder="seu.email@exemplo.com" value= "<?= htmlspecialchars($old['email'] ?? '') ?>"
+                    <input type="text" id="email" name="email" placeholder="seu.email@exemplo.com" value= "<?= htmlspecialchars($old['email'] ?? '') ?>"
                             class="input input-bordered w-full pl-10">
                     </div>
                     <?php if(isset($validacoes["email"])):?>

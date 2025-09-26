@@ -47,7 +47,7 @@ function flash()
 
 function config($key = null)
 {
-    $config = require base_path('dotenv.php');
+    $config = require base_path('/config/dotenv.php');
     
     if(strlen($key) > 0){
         return $config[$key];

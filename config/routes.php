@@ -1,16 +1,14 @@
 <?php
 
+use App\Controllers\CreateOrderController;
 use App\Controllers\DashboardController;
 use App\Controllers\GetOrderController;
 use Core\Route;
-use App\Controllers\IndexController;
 use App\Controllers\LoginController;
 use App\Controllers\LogoutController;
 use App\Controllers\RegisterController;
 
 (new Route())
-
-->get('/', DashboardController::class)
 
 ->get('/login', [LoginController::class, 'index'])
 ->post('/login', [LoginController::class, 'login'])
@@ -20,9 +18,11 @@ use App\Controllers\RegisterController;
 
 ->get('/logout', LogoutController::class)
 
-->post('/dashboard', [DashboardController::class, 'create'])
+->get('/', DashboardController::class)
 
-// ->get('/dashboard?=id', GetOrderController::class)
+->post('/create', CreateOrderController::class, 'create')
+
+->get('/pedido', [GetOrderController::class, 'index'])
 
 ->run();
 
