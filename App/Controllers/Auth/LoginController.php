@@ -1,15 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use App\Models\User;
 use Core\Database;
 use Core\Validacao;
-
-if(auth()){
-    header('Location: /');
-    exit();
-}
 
 class LoginController
 {
@@ -56,7 +51,7 @@ class LoginController
     $_SESSION['login_time'] = time();
     setcookie('user_id', $usuario->id, time() + 7 * 24 * 60 * 60, "/");
 
-    return header('Location: /');
+    return header('Location: /pedidos');
 
 }
     

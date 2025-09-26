@@ -36,7 +36,7 @@ function dd(...$dump)
 function abort($code)
 {
     http_response_code($code);
-    view($code);
+    viewRaw("/error/$code");
     die();
 }
 

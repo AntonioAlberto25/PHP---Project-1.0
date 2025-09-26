@@ -1,28 +1,24 @@
 <?php
 
-use App\Controllers\CreateOrderController;
-use App\Controllers\DashboardController;
-use App\Controllers\GetOrderController;
+use App\Controllers\Pedidos;
+use App\Controllers\Auth;
+use App\Middlewares\AuthMiddleware;
+use App\Middlewares\GuestMiddleware;
 use Core\Route;
-use App\Controllers\LoginController;
-use App\Controllers\LogoutController;
-use App\Controllers\RegisterController;
 
 (new Route())
 
-->get('/login', [LoginController::class, 'index'])
-->post('/login', [LoginController::class, 'login'])
+->get('/login', [Auth\LoginController::class, 'index'], GuestMiddleware::class)
+->post('/login', [Auth\LoginController::class, 'login'], GuestMiddleware::class)
 
-->get('/registrar', [RegisterController::class, 'index'])
-->post('/register', [RegisterController::class, 'register'])
+->get('/register', [Auth\RegisterController::class, 'index'], GuestMiddleware::class)
+->post('/register', [Auth\RegisterController::class, 'register'], GuestMiddleware::class)
 
-->get('/logout', LogoutController::class)
+->get('/logout', Auth\LogoutController::class, AuthMiddleware::class)
 
-->get('/', DashboardController::class)
-
-->post('/create', CreateOrderController::class, 'create')
-
-->get('/pedido', [GetOrderController::class, 'index'])
+->get('/pedidos', Pedidos\IndexController::class, AuthMiddleware::class)
+->post('/pedido/criar', Pedidos\CreateController::class, AuthMiddleware::class)
+->get('/pedido/editar', [Pedidos\EditController::class, 'index'], AuthMiddleware::class)
 
 ->run();
 

@@ -28,7 +28,7 @@
 
             <!-- Rodapé com ações -->
             <div class="flex justify-end pt-3 border-t border-base-300 space-x-5">
-            <button class="btn btn-sm btn-primary" onclick="window.location.href='/'">
+            <button class="btn btn-sm btn-primary" onclick="window.location.href='/pedidos'">
                     Voltar
             </button>
             <button class="btn btn-sm btn-primary">

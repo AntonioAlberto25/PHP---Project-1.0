@@ -10,7 +10,7 @@ unset($_SESSION['old']);
 
         <h3 class="text-2xl font-bold mb-4">Novo Pedido</h3>
 
-        <form method="POST" action="/create" class="space-y-4">
+        <form method="POST" action="/pedido/criar" class="space-y-4">
 
             <!-- Nome da Pessoa -->
             <div>

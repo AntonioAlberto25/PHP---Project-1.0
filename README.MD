@@ -1,63 +1,66 @@
-Requisitos Funcionais (RF)
+# Módulo de Gestão de Receitas e Custos
 
-Gestão de Conta e Acesso [X]
+## Fase 1: Estrutura do Banco de Dados (Models)
 
-RF1.1: Usuário pode se registrar usando e-mail e senha.
+- [ ] Criar a tabela `ingredientes`
+  - `id` (PK)
+  - `nome`
+  - `unidade_medida` (kg, g, ml, l, unidade)
+  - `preco_por_unidade`
+- [ ] Criar a tabela `receitas`
+  - `id` (PK)
+  - `nome`
+  - `descricao`
+  - `caminho_imagem`
+  - `custo_total` (será calculado)
+  - `rendimento`
+- [ ] Criar a tabela pivot `receita_ingredientes`
+  - `id` (PK)
+  - `receita_id` (FK)
+  - `ingrediente_id` (FK)
+  - `quantidade`
 
-RF1.2: Usuário pode realizar login usando e-mail e senha.
+## Fase 2: Lógica de Negócio (Controllers)
 
-RF1.3: Todas as consultas são filtradas pelo user_id do usuário autenticado, garantindo isolamento total dos dados.
+### IngredienteController.php
+- [ ] Criar o arquivo `IngredienteController.php`.
+- [ ] Implementar a função `index()` para listar todos os ingredientes.
+- [ ] Implementar as funções `create()` e `store()` para cadastrar novos ingredientes.
+- [ ] Implementar as funções `edit()` e `update()` para editar um ingrediente.
+- [ ] Implementar a função `destroy()` para excluir um ingrediente.
 
-RF1.4: Os cookies de usuário e sessão devem durar somente 7 dias logado no sistema.
+### ReceitaController.php
+- [ ] Criar o arquivo `ReceitaController.php`.
+- [ ] Implementar a função `index()` para exibir a galeria de receitas.
+- [ ] Implementar a função `create()` para exibir o formulário de nova receita.
+- [ ] Implementar a função `store()` para salvar uma nova receita:
+  - [ ] Salvar dados básicos da receita.
+  - [ ] Implementar lógica de upload de imagem.
+  - [ ] Salvar os ingredientes associados na tabela `receita_ingredientes`.
+  - [ ] Chamar a função de cálculo de custo após salvar.
+- [ ] Implementar a função `edit()` e `update()` para editar uma receita existente.
+- [ ] Implementar a função `destroy()` para excluir uma receita e seus vínculos.
+- [ ] Implementar a função interna `calcularCusto($receita_id)` para somar os custos dos ingredientes e atualizar a tabela `receitas`.
 
-Receitas []
+## Fase 3: Interface do Usuário (Views)
 
-RF2.1: Usuário pode cadastrar, editar e excluir receitas.
+### Telas de Ingredientes
+- [ ] Criar a View `ingredientes/index.php` para listar os ingredientes.
+- [ ] Criar a View `ingredientes/create.php` (formulário para adicionar/editar).
 
-RF2.2: Cada receita pode conter múltiplos ingredientes (relação N:N).
+### Telas de Receitas
+- [ ] Criar a View `receitas/index.php` para a galeria de receitas (com cards).
+- [ ] Criar a View `receitas/create.php` (formulário para adicionar/editar receita).
+  - [ ] Implementar o JavaScript para adicionar/remover campos de ingredientes dinamicamente no formulário.
 
-RF2.3: Usuário pode definir preço para cada receita.
+## Fase 4: Integração com Pedidos
 
-RF2.4: Listagem de receitas deve mostrar nome, ingredientes e preço atual.
+- [ ] Modificar a View de criação/edição de `Pedidos` para incluir um dropdown (select) de receitas.
+- [ ] Implementar a lógica (preferencialmente com AJAX/JavaScript) para buscar o custo da receita selecionada e sugerir um preço para o pedido.
 
-Insumos (Estoque)
+## Fase 5: Melhorias (Opcional)
 
-RF3.1: Usuário pode cadastrar, editar e excluir insumos.
-
-RF3.2: Quando um pedido é marcado como “Entregue”, os ingredientes correspondentes são subtraídos do estoque automaticamente.
-
-RF3.3: Sistema realiza verificação diária de estoque e gera alertas de insumos baixos.
-
-Vendas e Pedidos []
-
-RF4.1: Usuário pode criar pedidos vinculando receitas.
-
-RF4.2: O preço da receita utilizada no pedido é o preço mais recente definido.
-
-RF4.3: Pedido pode ser atualizado para status “Entregue” ou “Cancelado”.
-
-Segurança
-
-RNF1.1: Senhas devem ser armazenadas de forma segura (hashing).
-
-RNF1.2: Autenticação de usuários é obrigatória para acessar qualquer dado.
-
-Desempenho
-
-RNF2.1: Consultas de dashboard e relatórios devem ser otimizadas para exibir resultados rapidamente.
-
-Usabilidade
-
-RNF3.1: Interface simples e intuitiva, considerando que o usuário é apenas uma pessoa.
-
-Disponibilidade
-
-RNF4.1: Sistema deve estar disponível 24/7, mesmo que seja hospedado localmente ou em nuvem.
-
-Manutenção
-
-RNF5.1: Código deve ser modular para facilitar futuras melhorias e manutenção.
-
-Escalabilidade (Opcional)
-
-RNF6.1: Estrutura do sistema deve permitir adição futura de múltiplos usuários, caso necessário.
+- [ ] Implementar cálculo de custo em tempo real no formulário de receitas com JavaScript.
+- [ ] Adicionar um campo para "margem de lucro" para calcular o preço de venda final.
+- [ ] Usar um campo de busca com autocomplete para selecionar ingredientes, em vez de um dropdown.
+- [ ] Criar uma funcionalidade para gerar "lista de compras" com base nos ingredientes faltantes.

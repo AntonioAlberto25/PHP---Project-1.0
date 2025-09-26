@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Pedidos;
 
 use Core\Database;
 use Core\Validacao;
 
-class CreateOrderController
+class CreateController
 {
 
     public function __invoke()
@@ -18,7 +18,7 @@ class CreateOrderController
     
         if($validacao->existsError('create-order')){
             $_SESSION['old'] = $_POST;
-            return header('Location: /');
+            return header('Location: /pedidos');
         }
 
         $database = new Database(config('database'));
@@ -35,7 +35,7 @@ class CreateOrderController
 
         flash()->push('mensagem', 'Pedido cadastrado com sucesso');
 
-        return header("Location: /");
+        return header("Location: /pedidos");
         
     }
 

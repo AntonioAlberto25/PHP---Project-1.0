@@ -1,15 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Pedidos;
 
 use App\Models\Order;
 
-if(!auth()){
-    header('Location: /login');
-    exit();
-}
-
-class DashboardController
+class IndexController
 {
     public function __invoke()
     {
@@ -22,8 +17,7 @@ class DashboardController
         foreach ($orders as $i => $order){
             $order->numero = $i + 1;
         };
-        
-        
-        return view('dashboard', compact('orders'));
+         
+        return view('/pedidos/index', compact('orders'));
     }
 }

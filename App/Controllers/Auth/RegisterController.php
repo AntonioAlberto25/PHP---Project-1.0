@@ -1,14 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use Core\Database;
 use Core\Validacao;
-
-if(auth()){
-    header('Location: /');
-    exit();
-}
 
 class RegisterController
 {
@@ -31,7 +26,7 @@ class RegisterController
     
     if($validacao->existsError('register')){
         $_SESSION['old'] = $_POST;
-        header('Location: /registrar');
+        header('Location: /register');
         exit();
     }
     
