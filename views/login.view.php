@@ -82,7 +82,7 @@
 
             <p class="text-center text-sm text-gray-500 mt-6">
                 Não tem uma conta? 
-                <a href="/register" class="text-blue-600 font-semibold hover:underline">Crie uma</a>
+                <a href="/registrar" class="text-blue-600 font-semibold hover:underline">Crie uma</a>
             </p>
         </div>
     </div>

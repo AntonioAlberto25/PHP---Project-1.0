@@ -1,19 +1,28 @@
 <?php
 
+namespace App\Controllers;
+
 use Core\Database;
 use Core\Validacao;
-use App\Models\User;
- 
 
 if(auth()){
     header('Location: /');
     exit();
 }
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+class RegisterController
+{
 
-    $database = new Database(config('database'));
+    public function index()
+{
+    $old = $_SESSION['old'] ?? [];
+    unset($_SESSION['old']);
 
+    return viewRaw('register', compact('old'));
+}
+
+    public function register()
+{
     $validacao = Validacao::validar([
         'name' => ['required'],
         'email' => ['required', 'email', 'confirmed', 'unique:users'],
@@ -22,15 +31,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     if($validacao->existsError('register')){
         $_SESSION['old'] = $_POST;
-        header('Location: /register');
+        header('Location: /registrar');
         exit();
     }
     
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $email_confirmation = $_POST['email_confirmation'];
-    $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT);    
-    
+    $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+
+    $database = new Database(config('database'));
+
     $database->query(
     
     query: "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)", 
@@ -45,13 +55,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   
     flash()->push('mensagem', 'Registrado com sucesso');
     
-    header('Location:/login');
+    return header('Location:/login');
 
-    exit();
 }
 
-$old = $_SESSION['old'] ?? [];
-
-viewRaw('register', compact('old'));
-
-unset($_SESSION['old']);
+}

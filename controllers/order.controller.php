@@ -1,5 +1,9 @@
 <?php
 
+use Core\Database;
+use Core\Validacao;
+use App\Models\Order;
+
 if(!auth()){
     header('Location: /login');
     exit();

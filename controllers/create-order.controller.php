@@ -1,9 +1,16 @@
 <?php
 
+use Core\Database;
+use Core\Validacao;
+use App\Models\Order;
+
+
 if($_SERVER['REQUEST_METHOD'] != 'POST'){
     header('Location: /');
     exit();
 }
+
+$database = new Database(config('database'));
 
 $validacao = Validacao::validar([
         'nome' => ['required'],

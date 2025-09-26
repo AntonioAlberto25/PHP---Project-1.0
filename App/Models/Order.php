@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models;
+
+use Core\Database;
+
 class Order {
     public $id;
     public $name;

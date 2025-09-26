@@ -1,17 +1,12 @@
 <?php
 
-try {
-    //code...
-} catch (\Throwable $th) {
-    //throw $th;
-};
-
+namespace Core;
+use PDO;
+use PDOException;
 
 class Database
 {
     private $db;
-    
-    
     
     public function __construct($config)
     {
@@ -48,4 +43,3 @@ class Database
     
 }
 
-$database = new Database(config('database'));

@@ -1,17 +1,15 @@
 <?php
 
-require '../models/Order.php';
 
-require '../models/User.php';
+require '../Core/functions.php';
 
-require '../auth.php';
 
-require '../Flash.php';
+spl_autoload_register(function($class) {
+    // $class = str_replace('\\', DIRECTORY_SEPARATOR, $class); require base_path("../{$class}.php")    
+    require "../{$class}.php";
+});
 
-require '../functions.php';
 
-require '../Validacao.php';
+session_start();
 
-require '../Database.php';
-
-require '../routes.php';
+require base_path('./config/routes.php');
