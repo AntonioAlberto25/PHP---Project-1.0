@@ -30,7 +30,7 @@ class RegisterController
         exit();
     }
     
-    $name = $_POST['name'];
+    $name = formatName($_POST['name']);
     $email = $_POST['email'];
     $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT); 
 

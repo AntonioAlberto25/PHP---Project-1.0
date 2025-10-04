@@ -11,7 +11,7 @@ http_response_code(401);
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com/3.4.4"></script>
     
-    <meta http-equiv="refresh" content="5;url=/login">
+    <meta http-equiv="refresh" content="5;url=/">
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
 
@@ -32,7 +32,7 @@ http_response_code(401);
             </div>
 
         <div class="mt-6">
-            <a href="/login" class="text-blue-600 font-semibold hover:underline">
+            <a href="/" class="text-blue-600 font-semibold hover:underline">
                 Se não for redirecionado, clique aqui
             </a>
         </div>
@@ -41,7 +41,7 @@ http_response_code(401);
     <script>
         (function() {
             let countdown = 5;
-            const redirectUrl = '/login';
+            const redirectUrl = '/';
             const messageElement = document.getElementById('redirect-message');
 
             const updateMessage = () => {

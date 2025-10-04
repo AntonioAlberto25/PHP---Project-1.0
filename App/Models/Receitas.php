@@ -4,20 +4,18 @@ namespace App\Models;
 
 use Core\Database;
 
-class Order {
+class Receitas {
     public $id;
-    public $cliente_nome;
-    public $tipo_entrega;
-    public $preco_total;
-    public $data_entrega;
-    public $status;
+    public $nome;
+    public $preco;
+    public $data_criacao;
 
     public function querySelect($where, $params)
     {
        $database = new Database(config('database'));
 
        return $database->query(
-        query: "SELECT * FROM orders where $where",
+        query: "SELECT * FROM receitas where $where",
         class: self::class,
         params: $params
        );
@@ -27,7 +25,7 @@ class Order {
     public static function all($filter = null, $user_id)
     {
         return (new self)->querySelect(
-        'cliente_nome LIKE :filter AND user_id = :user_id', ['filter' => "%$filter%", 'user_id' => $user_id]
+        'nome LIKE :filter AND user_id = :user_id', ['filter' => "%$filter%", 'user_id' => $user_id]
         )->fetchAll();
     }
 

@@ -51,7 +51,7 @@ class LoginController
     $_SESSION['login_time'] = time();
     setcookie('user_id', $usuario->id, time() + 7 * 24 * 60 * 60, "/");
 
-    return header('Location: /pedidos');
+    return header('Location: /');
 
 }
     

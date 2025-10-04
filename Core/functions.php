@@ -77,3 +77,10 @@ function auth()
     return $_SESSION['auth'];
 
 }
+
+function formatName($nome)
+{
+    $nome = strtolower($nome);
+
+    return ucwords($nome);
+}

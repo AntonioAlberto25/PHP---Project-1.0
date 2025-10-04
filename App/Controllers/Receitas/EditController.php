@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers\Pedidos;
+namespace App\Controllers\Receitas;
 
-use App\Models\Order;
+use App\Models\Receitas;
 
 class EditController
 {
@@ -14,13 +14,13 @@ class EditController
 
     $user_id = auth()->id;
 
-    $order = Order::get($id, $user_id);
+    $receitas = Receitas::get($id, $user_id);
 
-    if(!$order){
+    if(!$receitas){
     abort(401);
     }
 
-    view('pedidos/editOrder', compact('order'));
+    view('pedidos/editReceita', compact('receitas'));
 }
 
     public function edit()

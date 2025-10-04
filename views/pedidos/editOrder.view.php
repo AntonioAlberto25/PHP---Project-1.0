@@ -10,7 +10,7 @@
 
             <!-- Nome do pedido -->
             <p class="text-xl font-bold text-primary">               
-               <?= $order->name ?>
+               <?= $order->cliente_nome ?>
             </p>
 
             <!-- Descrição -->

@@ -7,7 +7,7 @@ class GuestMiddleware
     public function handle()
     {
         if(auth()){
-            header('Location: /pedidos');
+            header('Location: /');
         }
     }
 }

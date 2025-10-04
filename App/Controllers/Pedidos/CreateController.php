@@ -23,14 +23,16 @@ class CreateController
 
         $database = new Database(config('database'));
 
-        $user_id = auth()->user_id;
-        $name = $_POST['nome'];
-        $description = $_POST['descricao'];
-        $date_entrega = $_POST['data_entrega'];
+        $user_id = auth()->id;
+        $cliente_nome = formatName($_POST['nome']);
+        $descricao = $_POST['descricao'];
+        $tipo_entrega = $_POST['tipo_entrega'];
+        $preco_total = $_POST['preco_total'];
+        $data_entrega = $_POST['data_entrega'];
 
         $database->query(
-            query: "INSERT INTO orders (name, description, date_entrega, user_id) VALUES (:name, :description, :date_entrega, :user_id)",
-            params: compact('name', 'description', 'date_entrega', 'user_id')
+            query: "INSERT INTO orders (cliente_nome, descricao, tipo_entrega, preco_total, data_entrega, user_id) VALUES (:cliente_nome, :descricao,:tipo_entrega, :preco_total, :data_entrega, :user_id)",
+            params: compact('cliente_nome', 'descricao', 'tipo_entrega', 'preco_total', 'data_entrega','user_id')
         );
 
         flash()->push('mensagem', 'Pedido cadastrado com sucesso');

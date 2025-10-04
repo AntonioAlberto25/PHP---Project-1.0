@@ -8,9 +8,14 @@ class IndexController
 {
     public function __invoke()
     {
-        $user_id = auth()->user_id;
+        $user_id = auth()->id;
 
-        $search = $_REQUEST['search'] ?? '';
+        if (isset($_GET['search']) && trim($_GET['search']) === '') {
+        header('Location: /pedidos');
+        exit;
+        }
+
+        $search = isset($_REQUEST['search']) ? $_REQUEST['search'] : null;
 
         $orders = Order::all($search, $user_id);
 
