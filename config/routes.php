@@ -29,5 +29,10 @@ use Core\Route;
 ->get('/receitas/criar', [Receitas\CreateController::class, 'index'], AuthMiddleware::class)
 ->post('/receitas/criar', [Receitas\CreateController::class, 'create'], AuthMiddleware::class)
 
+->get('/receitas/edit', [Receitas\EditController::class, 'index'], AuthMiddleware::class)
+->put('/receitas/edit', [Receitas\EditController::class, 'edit'], AuthMiddleware::class)
+
+->delete('/receitas', Receitas\DeleteController::class, AuthMiddleware::class)
+
 ->run();
 
