@@ -21,8 +21,12 @@ use Core\Route;
 ->get('/logout', Auth\LogoutController::class, AuthMiddleware::class)
 
 ->get('/pedidos', Pedidos\IndexController::class, AuthMiddleware::class)
-->post('/pedido/criar', Pedidos\CreateController::class, AuthMiddleware::class)
-->get('/pedido/editar', [Pedidos\EditController::class, 'index'], AuthMiddleware::class)
+
+->get('/pedidos/criar', [Pedidos\CreateController::class, 'index'], AuthMiddleware::class)
+->post('/pedidos/criar', [Pedidos\CreateController::class, 'create'], AuthMiddleware::class)
+
+->get('/pedidos/edit', [Pedidos\EditController::class, 'index'], AuthMiddleware::class)
+->post('/pedidos/edit', [Pedidos\EditController::class, 'edit'], AuthMiddleware::class)
 
 ->get('/receitas', Receitas\IndexController::class, AuthMiddleware::class)
 

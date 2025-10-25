@@ -7,8 +7,22 @@ use Core\Validacao;
 
 class CreateController
 {
+    public function index()
+    {
+        $old = $_SESSION['old'] ?? [];
+        unset($_SESSION['old']);
 
-    public function __invoke()
+        $database = new Database(config('database'));
+
+        $receitas = $database->query(
+            query: "SELECT * FROM receitas",
+        )->fetchAll();
+    
+        return view('pedidos/createOrder', compact('old', 'receitas'));
+    
+    }
+
+    public function create()
     {
         $validacao = Validacao::validar([
         'nome' => ['required'],
@@ -34,6 +48,8 @@ class CreateController
             query: "INSERT INTO orders (cliente_nome, descricao, tipo_entrega, preco_total, data_entrega, user_id) VALUES (:cliente_nome, :descricao,:tipo_entrega, :preco_total, :data_entrega, :user_id)",
             params: compact('cliente_nome', 'descricao', 'tipo_entrega', 'preco_total', 'data_entrega','user_id')
         );
+
+        
 
         flash()->push('mensagem', 'Pedido cadastrado com sucesso');
 
